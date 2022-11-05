@@ -6,9 +6,10 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT;
 
-// Connect database
-const database = require("./database/database");
-database();
+// Body parser
+const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // Admin router
 const adminRouter = require("./routers/admin/admin-router");
