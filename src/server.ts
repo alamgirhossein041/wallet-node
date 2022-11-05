@@ -6,6 +6,10 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT;
 
+// Connect database
+const database = require("./database/database");
+database();
+
 // Admin router
 const adminRouter = require("./routers/admin/admin-router");
 app.use("/admin", adminRouter);
