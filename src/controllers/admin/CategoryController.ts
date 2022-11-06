@@ -67,4 +67,32 @@ const update = async (req: Request, res: Response) => {
     }
 };
 
-module.exports = { create, update };
+const detail = async (req: Request, res: Response) => {
+    const categoryId = req.params.id;
+
+    const category = await Category.findOne({
+        where: {
+            id: categoryId,
+        },
+    });
+
+    if (category) {
+        return res.send({
+            statusCode: STATUS.SUCCESS,
+            data: {
+                message: "",
+                data: category,
+            },
+        });
+    } else {
+        return res.send({
+            statusCode: STATUS.ERROR,
+            data: {
+                message: "Get detail category failed!",
+                data: "",
+            },
+        });
+    }
+};
+
+module.exports = { create, update, detail };
