@@ -123,4 +123,23 @@ const remove = async (req: Request, res: Response) => {
     }
 };
 
-module.exports = { create, update, detail, remove };
+const list = async (req: Request, res: Response) => {
+    const { page, limit } = req.query;
+
+    const offset = Number(page) * Number(limit) - Number(limit);
+
+    const categories = await Category.findAll({
+        offset: offset,
+        limit: Number(limit),
+    });
+
+    return res.send({
+        statusCode: STATUS.SUCCESS,
+        data: {
+            categories: categories,
+            total: categories.length,
+        },
+    });
+};
+
+module.exports = { create, update, detail, remove, list };
