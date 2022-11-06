@@ -3,8 +3,14 @@ const router = express.Router();
 
 // Controller
 const { login, register } = require("../../controllers/AuthController");
-const { addRole } = require("../../controllers/admin/RoleController");
-const { create, update, detail, remove, list } = require("../../controllers/admin/CategoryController");
+const { createRole } = require("../../controllers/admin/RoleController");
+const {
+    createCategory,
+    updateCategory,
+    detailCategory,
+    removeCategory,
+    listCategory,
+} = require("../../controllers/admin/CategoryController");
 const { createPromotion } = require("../../controllers/admin/PromotionController");
 
 // Middlewares
@@ -15,14 +21,14 @@ router.post("/login", login);
 router.post("/register", register);
 
 // Role
-router.post("/add-role", checkAccessToken, addRole);
+router.post("/role/create", checkAccessToken, createRole);
 
 // Category
-router.get("/category/list", checkAccessToken, list);
-router.post("/create-category", checkAccessToken, create);
-router.post("/update-category", checkAccessToken, update);
-router.get("/category/:id", checkAccessToken, detail);
-router.get("/category/delete/:id", checkAccessToken, remove);
+router.get("/category/list", checkAccessToken, listCategory);
+router.post("/category/create", checkAccessToken, createCategory);
+router.post("/category/update", checkAccessToken, updateCategory);
+router.get("/category/:id", checkAccessToken, detailCategory);
+router.get("/category/delete/:id", checkAccessToken, removeCategory);
 
 // Promotion
 router.post("/promotion/create", checkAccessToken, createPromotion);

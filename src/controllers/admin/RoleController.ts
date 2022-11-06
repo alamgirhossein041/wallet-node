@@ -3,7 +3,7 @@ import { STATUS } from "../../common/statusCode";
 
 const Role = require("../../models/Role");
 
-const addRole = async (req: Request, res: Response) => {
+const createRole = async (req: Request, res: Response) => {
     const { roleName, roleType } = req.body;
 
     // Get from DB
@@ -34,4 +34,4 @@ const addRole = async (req: Request, res: Response) => {
     }
 };
 
-module.exports = { addRole };
+module.exports = { createRole };

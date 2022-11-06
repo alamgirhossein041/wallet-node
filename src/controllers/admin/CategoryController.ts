@@ -3,7 +3,7 @@ import { STATUS } from "../../common/statusCode";
 
 const Category = require("../../models/Category");
 
-const create = async (req: Request, res: Response) => {
+const createCategory = async (req: Request, res: Response) => {
     const { categoryName, categorySlug, categoryDesc, categoryType } = req.body;
 
     const [category, created] = await Category.findOrCreate({
@@ -34,7 +34,7 @@ const create = async (req: Request, res: Response) => {
     }
 };
 
-const update = async (req: Request, res: Response) => {
+const updateCategory = async (req: Request, res: Response) => {
     const { categoryName, categorySlug, categoryDesc, categoryId } = req.body;
 
     const updated = await Category.update(
@@ -67,7 +67,7 @@ const update = async (req: Request, res: Response) => {
     }
 };
 
-const detail = async (req: Request, res: Response) => {
+const detailCategory = async (req: Request, res: Response) => {
     const categoryId = req.params.id;
 
     const category = await Category.findOne({
@@ -95,7 +95,7 @@ const detail = async (req: Request, res: Response) => {
     }
 };
 
-const remove = async (req: Request, res: Response) => {
+const removeCategory = async (req: Request, res: Response) => {
     const categoryId = req.params.id;
 
     const remove = await Category.destroy({
@@ -123,7 +123,7 @@ const remove = async (req: Request, res: Response) => {
     }
 };
 
-const list = async (req: Request, res: Response) => {
+const listCategory = async (req: Request, res: Response) => {
     const { page, limit } = req.query;
 
     const offset = Number(page) * Number(limit) - Number(limit);
@@ -142,4 +142,4 @@ const list = async (req: Request, res: Response) => {
     });
 };
 
-module.exports = { create, update, detail, remove, list };
+module.exports = { createCategory, updateCategory, detailCategory, removeCategory, listCategory };
