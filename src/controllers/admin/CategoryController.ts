@@ -34,4 +34,37 @@ const create = async (req: Request, res: Response) => {
     }
 };
 
-module.exports = { create };
+const update = async (req: Request, res: Response) => {
+    const { categoryName, categorySlug, categoryDesc, categoryId } = req.body;
+
+    const updated = await Category.update(
+        {
+            categoryName,
+            categorySlug,
+            categoryDesc,
+        },
+        {
+            where: {
+                id: categoryId,
+            },
+        }
+    );
+
+    if (updated) {
+        return res.send({
+            statusCode: STATUS.SUCCESS,
+            data: {
+                message: "Category updated!",
+            },
+        });
+    } else {
+        return res.send({
+            statusCode: STATUS.ERROR,
+            data: {
+                message: "Category updated failed!",
+            },
+        });
+    }
+};
+
+module.exports = { create, update };
