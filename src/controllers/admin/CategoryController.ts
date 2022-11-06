@@ -95,4 +95,32 @@ const detail = async (req: Request, res: Response) => {
     }
 };
 
-module.exports = { create, update, detail };
+const remove = async (req: Request, res: Response) => {
+    const categoryId = req.params.id;
+
+    const remove = await Category.destroy({
+        where: {
+            id: categoryId,
+        },
+    });
+
+    if (remove) {
+        return res.send({
+            statusCode: STATUS.SUCCESS,
+            data: {
+                message: "Delete category successfully!",
+                data: "",
+            },
+        });
+    } else {
+        return res.send({
+            statusCode: STATUS.ERROR,
+            data: {
+                message: "Delete category failed!",
+                data: "",
+            },
+        });
+    }
+};
+
+module.exports = { create, update, detail, remove };
