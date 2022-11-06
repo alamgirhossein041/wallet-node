@@ -6,7 +6,7 @@ import { STATUS } from "../common/statusCode";
 
 const User = require("../models/User.ts");
 
-const login = (req: Request, res: Response) => {
+const login = async (req: Request, res: Response) => {
     const { username, password } = req.body;
 
     if (!username || !password) {
@@ -18,21 +18,31 @@ const login = (req: Request, res: Response) => {
         });
     }
 
-    const user: IUser = {
-        username,
-        password,
-    };
-
-    // Create token
-    const token = jwt.sign(user, process.env.JWT_KEY);
-
-    res.send({
-        statusCode: STATUS.SUCCESS,
-        data: {
-            message: "",
-            token: token,
+    const user = await User.findOne({
+        where: {
+            username: username,
         },
     });
+
+    if (!user) {
+        res.send({
+            statusCode: STATUS.ERROR,
+            data: {
+                message: "Username or password wrong",
+            },
+        });
+    } else {
+        // Create token
+        const token = jwt.sign({ username, password }, process.env.JWT_KEY);
+
+        res.send({
+            statusCode: STATUS.SUCCESS,
+            data: {
+                message: "",
+                token: token,
+            },
+        });
+    }
 };
 
 const register = async (req: Request, res: Response) => {
