@@ -9,6 +9,7 @@ const sequelize = new Sequelize(settingsOption.database, settingsOption.username
         min: 0,
         idle: 10000,
     },
+    logging: settingsOption.logging,
 });
 
 try {

@@ -4,6 +4,7 @@ const settings: IDatabase = {
     password: process.env.PASSWORD,
     host: process.env.HOST,
     dialect: process.env.DIALECT,
+    logging: false,
 };
 
 module.exports = settings;
@@ -14,4 +15,5 @@ interface IDatabase {
     password: string;
     host: string;
     dialect: string;
+    logging: boolean;
 }
