@@ -11,7 +11,7 @@ const {
     removeCategory,
     listCategory,
 } = require("../../controllers/admin/CategoryController");
-const { createPromotion } = require("../../controllers/admin/PromotionController");
+const { createPromotion, updatePromotion } = require("../../controllers/admin/PromotionController");
 
 // Middlewares
 const checkAccessToken = require("../../middlewares/checkAccessToken");
@@ -32,5 +32,6 @@ router.get("/category/delete/:id", checkAccessToken, removeCategory);
 
 // Promotion
 router.post("/promotion/create", checkAccessToken, createPromotion);
+router.post("/promotion/update", checkAccessToken, updatePromotion);
 
 module.exports = router;
