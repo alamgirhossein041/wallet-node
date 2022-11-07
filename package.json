@@ -1,30 +1,31 @@
 {
-  "name": "wallet-node",
-  "version": "1.0.0",
-  "main": "server.js",
-  "repository": "https://github.com/hieungochoangit/wallet-node.git",
-  "author": "hieuhn <hieungochoangit@gmail.com>",
-  "license": "MIT",
-  "scripts": {
-    "build": "tsc",
-    "dev": "nodemon --exec ts-node ./src/server.ts",
-    "start": "nodemon ./dist/server.js",
-    "prod": "npm run build && npm run start",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "dependencies": {
-    "@sequelize/core": "^7.0.0-alpha.10",
-    "@types/express": "^4.17.14",
-    "body-parser": "^1.20.1",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "jsonwebtoken": "^8.5.1",
-    "mysql": "^2.18.1",
-    "mysql2": "^2.3.3",
-    "nodemon": "^2.0.20",
-    "sequelize": "^6.25.4",
-    "ts-node": "^10.9.1",
-    "tsc": "^2.0.4",
-    "typescript": "^4.8.4"
-  }
+    "name": "wallet-node",
+    "version": "1.0.0",
+    "main": "server.js",
+    "repository": "https://github.com/hieungochoangit/wallet-node.git",
+    "author": "hieuhn <hieungochoangit@gmail.com>",
+    "license": "MIT",
+    "scripts": {
+        "build": "tsc",
+        "dev": "nodemon --exec ts-node ./src/server.ts",
+        "start": "nodemon ./dist/server.js",
+        "prod": "npm run build && npm run start",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "dependencies": {
+        "@sequelize/core": "^7.0.0-alpha.10",
+        "@types/express": "^4.17.14",
+        "body-parser": "^1.20.1",
+        "dotenv": "^16.0.3",
+        "express": "^4.18.2",
+        "joi": "^17.7.0",
+        "jsonwebtoken": "^8.5.1",
+        "mysql": "^2.18.1",
+        "mysql2": "^2.3.3",
+        "nodemon": "^2.0.20",
+        "sequelize": "^6.25.4",
+        "ts-node": "^10.9.1",
+        "tsc": "^2.0.4",
+        "typescript": "^4.8.4"
+    }
 }

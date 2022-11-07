@@ -1,6 +1,8 @@
 import express = require("express");
 const router = express.Router();
 
+const requestType = require("../../common/requestType");
+
 // Controller
 const { login, register } = require("../../controllers/AuthController");
 const { createRole } = require("../../controllers/admin/RoleController");
@@ -15,16 +17,26 @@ const { createPromotion, updatePromotion } = require("../../controllers/admin/Pr
 
 // Middlewares
 const checkAccessToken = require("../../middlewares/checkAccessToken");
+const { validateParams } = require("../../helpers/validationRouters");
+
+// Schema
+const { userLoginSchema, userRegisterSchema } = require("../../validations/userSchema");
+const { getListCategorySchema } = require("../../validations/categorySchema");
 
 // Authentication
-router.post("/login", login);
-router.post("/register", register);
+router.post("/login", validateParams(userLoginSchema, requestType.body), login);
+router.post("/register", validateParams(userRegisterSchema, requestType.body), register);
 
 // Role
 router.post("/role/create", checkAccessToken, createRole);
 
 // Category
-router.get("/category/list", checkAccessToken, listCategory);
+router.get(
+    "/category/list",
+    [validateParams(getListCategorySchema, requestType.query)],
+    checkAccessToken,
+    listCategory
+);
 router.post("/category/create", checkAccessToken, createCategory);
 router.post("/category/update", checkAccessToken, updateCategory);
 router.get("/category/:id", checkAccessToken, detailCategory);
