@@ -17,7 +17,7 @@ const { createPromotion, updatePromotion } = require("../../controllers/admin/Pr
 
 // Middlewares
 const checkAccessToken = require("../../middlewares/checkAccessToken");
-const { validateParams } = require("../../helpers/validationRouters");
+const { validateRequest } = require("../../helpers/validationRouters");
 
 // Schema
 const { userLoginSchema, userRegisterSchema } = require("../../validations/userSchema");
@@ -31,8 +31,8 @@ const {
 const { createPromotionSchema, updatePromotionSchema } = require("../../validations/promotionSchema");
 
 // Authentication
-router.post("/login", validateParams(userLoginSchema, requestType.body), login);
-router.post("/register", validateParams(userRegisterSchema, requestType.body), register);
+router.post("/login", validateRequest(userLoginSchema, requestType.body), login);
+router.post("/register", validateRequest(userRegisterSchema, requestType.body), register);
 
 // Role
 router.post("/role/create", checkAccessToken, createRole);
@@ -40,40 +40,40 @@ router.post("/role/create", checkAccessToken, createRole);
 // Category
 router.get(
     "/category/list",
-    [validateParams(getListCategorySchema, requestType.query)],
+    [validateRequest(getListCategorySchema, requestType.query)],
     checkAccessToken,
     listCategory
 );
 router.post(
     "/category/create",
-    [validateParams(createCategorySchema, requestType.body), checkAccessToken],
+    [validateRequest(createCategorySchema, requestType.body), checkAccessToken],
     createCategory
 );
 router.post(
     "/category/update",
-    [validateParams(updateCategorySchema, requestType.body), checkAccessToken],
+    [validateRequest(updateCategorySchema, requestType.body), checkAccessToken],
     updateCategory
 );
 router.get(
     "/category/:id",
-    [validateParams(getDetailCategorySchema, requestType.params), checkAccessToken],
+    [validateRequest(getDetailCategorySchema, requestType.params), checkAccessToken],
     detailCategory
 );
 router.get(
     "/category/delete/:id",
-    [validateParams(deleteCategorySchema, requestType.params), checkAccessToken],
+    [validateRequest(deleteCategorySchema, requestType.params), checkAccessToken],
     removeCategory
 );
 
 // Promotion
 router.post(
     "/promotion/create",
-    [validateParams(createPromotionSchema, requestType.body), checkAccessToken],
+    [validateRequest(createPromotionSchema, requestType.body), checkAccessToken],
     createPromotion
 );
 router.post(
     "/promotion/update",
-    [validateParams(updatePromotionSchema, requestType.body), checkAccessToken],
+    [validateRequest(updatePromotionSchema, requestType.body), checkAccessToken],
     updatePromotion
 );
 

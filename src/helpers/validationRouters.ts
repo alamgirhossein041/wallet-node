@@ -2,32 +2,17 @@ import { STATUS } from "./../common/statusCode";
 import { Request, Response, NextFunction } from "express";
 const requestType = require("../common/requestType");
 
-const validateParams = (schema: any, type: string) => {
+const validateRequest = (schema: any, type: string) => {
     return (req: Request, res: Response, next: NextFunction) => {
-        let validateResult: any;
-        switch (type) {
-            case requestType.params:
-                validateResult = schema.validate({
-                    params: req.params,
-                });
-                break;
-            case requestType.query:
-                validateResult = schema.validate({
-                    query: req.query,
-                });
-                break;
-            case requestType.body:
-                validateResult = schema.validate({
-                    body: req.body,
-                });
-                break;
-        }
+        const { error } = schema.validate({
+            [type]: req[type],
+        });
 
-        if (validateResult.error) {
+        if (error) {
             return res.send({
                 statusCode: STATUS.ERROR,
                 data: {
-                    message: "Error field!",
+                    message: error.details[0].message,
                 },
             });
         } else {
@@ -36,4 +21,4 @@ const validateParams = (schema: any, type: string) => {
     };
 };
 
-module.exports = { validateParams };
+module.exports = { validateRequest };
