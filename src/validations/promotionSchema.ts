@@ -1,5 +1,6 @@
 import joi = require("joi");
 const requestType = require("../common/requestType");
+const { onlyNumber } = require("../common/regex");
 
 const createPromotionSchema = joi.object().keys({
     [requestType.body]: {
@@ -16,4 +17,10 @@ const updatePromotionSchema = joi.object().keys({
     },
 });
 
-module.exports = { createPromotionSchema, updatePromotionSchema };
+const deletePromotionSchema = joi.object().keys({
+    [requestType.params]: {
+        id: joi.string().pattern(onlyNumber).required(),
+    },
+});
+
+module.exports = { createPromotionSchema, updatePromotionSchema, deletePromotionSchema };

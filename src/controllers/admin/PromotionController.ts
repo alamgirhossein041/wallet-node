@@ -64,4 +64,32 @@ const updatePromotion = async (req: Request, res: Response) => {
     }
 };
 
-module.exports = { createPromotion, updatePromotion };
+const removePromotion = async (req: Request, res: Response) => {
+    const promotionId = req.params.id;
+
+    const remove = await Promotion.destroy({
+        where: {
+            id: promotionId,
+        },
+    });
+
+    if (remove) {
+        return res.send({
+            statusCode: STATUS.SUCCESS,
+            data: {
+                message: "Delete promotion successfully!",
+                data: "",
+            },
+        });
+    } else {
+        return res.send({
+            statusCode: STATUS.ERROR,
+            data: {
+                message: "Delete promotion failed!",
+                data: "",
+            },
+        });
+    }
+};
+
+module.exports = { createPromotion, updatePromotion, removePromotion };

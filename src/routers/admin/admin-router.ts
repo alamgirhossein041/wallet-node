@@ -13,7 +13,7 @@ const {
     removeCategory,
     listCategory,
 } = require("../../controllers/admin/CategoryController");
-const { createPromotion, updatePromotion } = require("../../controllers/admin/PromotionController");
+const { createPromotion, updatePromotion, removePromotion } = require("../../controllers/admin/PromotionController");
 
 // Middlewares
 const checkAccessToken = require("../../middlewares/checkAccessToken");
@@ -28,7 +28,11 @@ const {
     getDetailCategorySchema,
     deleteCategorySchema,
 } = require("../../validations/categorySchema");
-const { createPromotionSchema, updatePromotionSchema } = require("../../validations/promotionSchema");
+const {
+    createPromotionSchema,
+    updatePromotionSchema,
+    deletePromotionSchema,
+} = require("../../validations/promotionSchema");
 
 // Authentication
 router.post("/login", validateRequest(userLoginSchema, requestType.body), login);
@@ -75,6 +79,11 @@ router.post(
     "/promotion/update",
     [validateRequest(updatePromotionSchema, requestType.body), checkAccessToken],
     updatePromotion
+);
+router.get(
+    "/promotion/delete/:id",
+    [validateRequest(deletePromotionSchema, requestType.params), checkAccessToken],
+    removePromotion
 );
 
 module.exports = router;
