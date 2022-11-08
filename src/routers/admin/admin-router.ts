@@ -21,7 +21,13 @@ const { validateParams } = require("../../helpers/validationRouters");
 
 // Schema
 const { userLoginSchema, userRegisterSchema } = require("../../validations/userSchema");
-const { getListCategorySchema } = require("../../validations/categorySchema");
+const {
+    getListCategorySchema,
+    createCategorySchema,
+    updateCategorySchema,
+    getDetailCategorySchema,
+    deleteCategorySchema,
+} = require("../../validations/categorySchema");
 
 // Authentication
 router.post("/login", validateParams(userLoginSchema, requestType.body), login);
@@ -37,10 +43,26 @@ router.get(
     checkAccessToken,
     listCategory
 );
-router.post("/category/create", checkAccessToken, createCategory);
-router.post("/category/update", checkAccessToken, updateCategory);
-router.get("/category/:id", checkAccessToken, detailCategory);
-router.get("/category/delete/:id", checkAccessToken, removeCategory);
+router.post(
+    "/category/create",
+    [validateParams(createCategorySchema, requestType.body), checkAccessToken],
+    createCategory
+);
+router.post(
+    "/category/update",
+    [validateParams(updateCategorySchema, requestType.body), checkAccessToken],
+    updateCategory
+);
+router.get(
+    "/category/:id",
+    [validateParams(getDetailCategorySchema, requestType.params), checkAccessToken],
+    detailCategory
+);
+router.get(
+    "/category/delete/:id",
+    [validateParams(deleteCategorySchema, requestType.params), checkAccessToken],
+    removeCategory
+);
 
 // Promotion
 router.post("/promotion/create", checkAccessToken, createPromotion);
