@@ -28,6 +28,7 @@ const {
     getDetailCategorySchema,
     deleteCategorySchema,
 } = require("../../validations/categorySchema");
+const { createPromotionSchema, updatePromotionSchema } = require("../../validations/promotionSchema");
 
 // Authentication
 router.post("/login", validateParams(userLoginSchema, requestType.body), login);
@@ -65,7 +66,15 @@ router.get(
 );
 
 // Promotion
-router.post("/promotion/create", checkAccessToken, createPromotion);
-router.post("/promotion/update", checkAccessToken, updatePromotion);
+router.post(
+    "/promotion/create",
+    [validateParams(createPromotionSchema, requestType.body), checkAccessToken],
+    createPromotion
+);
+router.post(
+    "/promotion/update",
+    [validateParams(updatePromotionSchema, requestType.body), checkAccessToken],
+    updatePromotion
+);
 
 module.exports = router;
