@@ -8,7 +8,7 @@ const validateParams = (schema: any, type: string) => {
         switch (type) {
             case requestType.params:
                 validateResult = schema.validate({
-                    params: req.query,
+                    params: req.params,
                 });
                 break;
             case requestType.query:
