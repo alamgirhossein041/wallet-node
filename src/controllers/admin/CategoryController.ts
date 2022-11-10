@@ -133,11 +133,13 @@ const listCategory = async (req: Request, res: Response) => {
         limit: Number(limit),
     });
 
+    const totalCategory = await Category.findAll();
+
     return res.send({
         statusCode: STATUS.SUCCESS,
         data: {
             categories: categories,
-            total: categories.length,
+            total: totalCategory.length,
         },
     });
 };

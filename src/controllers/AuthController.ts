@@ -21,6 +21,7 @@ const login = async (req: Request, res: Response) => {
     const user = await User.findOne({
         where: {
             username: username,
+            password: password,
         },
     });
 
