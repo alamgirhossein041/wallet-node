@@ -3,6 +3,7 @@ import jwt = require("jsonwebtoken");
 
 import { IUser } from "./../interfaces/auth";
 import { STATUS } from "../common/statusCode";
+import { getUser } from "../common/functions";
 
 const User = require("../models/User.ts");
 
@@ -86,4 +87,8 @@ const register = async (req: Request, res: Response) => {
     }
 };
 
-module.exports = { login, register };
+const detail = async (req: Request, res: Response) => {
+    getUser(req, res);
+};
+
+module.exports = { login, register, detail };

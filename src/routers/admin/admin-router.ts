@@ -4,7 +4,7 @@ const router = express.Router();
 const requestType = require("../../common/requestType");
 
 // Controller
-const { login, register } = require("../../controllers/AuthController");
+const { login, register, detail } = require("../../controllers/AuthController");
 const { createRole } = require("../../controllers/admin/RoleController");
 const {
     createCategory,
@@ -39,6 +39,7 @@ const { createCouponSchema, updateCouponSchema, deleteCouponSchema } = require("
 // Authentication
 router.post("/login", validateRequest(userLoginSchema, requestType.body), login);
 router.post("/register", validateRequest(userRegisterSchema, requestType.body), register);
+router.get("/detail", checkAccessToken, detail);
 
 // Role
 router.post("/role/create", checkAccessToken, createRole);
