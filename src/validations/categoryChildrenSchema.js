@@ -21,8 +21,18 @@ const detailCategoryChildrenSchema = joi.object().keys({
     },
 });
 
+const updateCategoryChildrenSchema = joi.object().keys({
+    [requestType.body]: {
+        id: joi.string().max(20).required(),
+        categoryName: joi.string().max(20).required(),
+        categorySlug: joi.string().max(50).required(),
+        categoryId: joi.string().max(2).required(),
+    },
+});
+
 module.exports = {
     createCategoryChildrenSchema,
     deleteCategoryChildrenSchema,
     detailCategoryChildrenSchema,
+    updateCategoryChildrenSchema,
 };

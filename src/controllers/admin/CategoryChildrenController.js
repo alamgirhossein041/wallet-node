@@ -46,17 +46,17 @@ const createCategory = async (req, res) => {
 };
 
 const updateCategory = async (req, res) => {
-    const { categoryName, categorySlug, categoryDesc, categoryId } = req.body;
+    const { id, categoryName, categorySlug, categoryId } = req.body;
 
-    const updated = await Category.update(
+    const updated = await CategoryChildren.update(
         {
             categoryName,
             categorySlug,
-            categoryDesc,
+            categoryId,
         },
         {
             where: {
-                id: categoryId,
+                id: id,
             },
         }
     );

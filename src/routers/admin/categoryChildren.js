@@ -9,12 +9,14 @@ const {
     createCategory,
     removeCategory,
     detailCategory,
+    updateCategory,
 } = require("../../controllers/admin/CategoryChildrenController");
 
 const {
     createCategoryChildrenSchema,
     deleteCategoryChildrenSchema,
     detailCategoryChildrenSchema,
+    updateCategoryChildrenSchema,
 } = require("../../validations/categoryChildrenSchema");
 
 router.post(
@@ -34,6 +36,11 @@ router.get(
     [validateRequest(detailCategoryChildrenSchema, requestType.params)],
     checkAccessToken,
     detailCategory
+);
+router.post(
+    "/category-children/update",
+    [validateRequest(updateCategoryChildrenSchema, requestType.body), checkAccessToken],
+    updateCategory
 );
 
 module.exports = router;
