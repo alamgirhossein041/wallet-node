@@ -81,7 +81,7 @@ const updateCategory = async (req, res) => {
 const detailCategory = async (req, res) => {
     const categoryId = req.params.id;
 
-    const category = await Category.findOne({
+    const category = await CategoryChildren.findOne({
         where: {
             id: categoryId,
         },

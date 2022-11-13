@@ -5,11 +5,16 @@ const { validateRequest } = require("../../helpers/validationRouters");
 const requestType = require("../../common/requestType");
 const checkAccessToken = require("../../middlewares/checkAccessToken");
 
-const { createCategory, removeCategory } = require("../../controllers/admin/CategoryChildrenController");
+const {
+    createCategory,
+    removeCategory,
+    detailCategory,
+} = require("../../controllers/admin/CategoryChildrenController");
 
 const {
     createCategoryChildrenSchema,
     deleteCategoryChildrenSchema,
+    detailCategoryChildrenSchema,
 } = require("../../validations/categoryChildrenSchema");
 
 router.post(
@@ -23,6 +28,12 @@ router.get(
     [validateRequest(deleteCategoryChildrenSchema, requestType.params)],
     checkAccessToken,
     removeCategory
+);
+router.get(
+    "/category-children/detail/:id",
+    [validateRequest(detailCategoryChildrenSchema, requestType.params)],
+    checkAccessToken,
+    detailCategory
 );
 
 module.exports = router;
