@@ -1,5 +1,5 @@
 const Sequelize = require("@sequelize/core");
-const settingsOption = require("../configs/database-setting");
+const settingsOption = require("../configs/databaseSetting");
 
 const sequelize = new Sequelize(settingsOption.database, settingsOption.username, settingsOption.password, {
     host: settingsOption.host,
