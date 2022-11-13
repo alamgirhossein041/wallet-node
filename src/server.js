@@ -19,12 +19,14 @@ app.use(bodyParser.json());
 const {
     authRouter,
     categoryRouter,
+    categoryChildrenRouter,
     promotionRouter,
     roleRouter,
     couponRouter,
 } = require("./routers/admin/admin-router");
 app.use("/admin", authRouter);
 app.use("/admin", categoryRouter);
+app.use("/admin", categoryChildrenRouter);
 app.use("/admin", promotionRouter);
 app.use("/admin", roleRouter);
 app.use("/admin", couponRouter);
