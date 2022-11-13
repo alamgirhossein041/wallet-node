@@ -1,10 +1,9 @@
-import { STATUS } from "./../common/statusCode";
-import { Request, Response, NextFunction } from "express";
-import jwt = require("jsonwebtoken");
+const { STATUS } = require("./statusCode");
+const jwt = require("jsonwebtoken");
 
-const User = require("../models/User.ts");
+const User = require("../models/User.js");
 
-const checkAccessToken = async (req: Request, res: Response, next: NextFunction) => {
+const getUser = async (req, res) => {
     const authHeader = req.header("Authorization");
     const token = authHeader && authHeader.split(" ")[1];
 
@@ -33,11 +32,14 @@ const checkAccessToken = async (req: Request, res: Response, next: NextFunction)
             return res.send({
                 statusCode: STATUS.ERROR,
                 data: {
-                    message: "Token invalid",
+                    message: "User invalid",
                 },
             });
         } else {
-            next();
+            return res.send({
+                statusCode: STATUS.SUCCESS,
+                data: { username },
+            });
         }
     } catch (error) {
         console.log(error);
@@ -50,4 +52,4 @@ const checkAccessToken = async (req: Request, res: Response, next: NextFunction)
     }
 };
 
-module.exports = checkAccessToken;
+module.exports = { getUser };

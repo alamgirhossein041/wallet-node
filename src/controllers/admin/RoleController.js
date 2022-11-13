@@ -1,9 +1,8 @@
-import { Request, Response } from "express";
-import { STATUS } from "../../common/statusCode";
+const RESPONSE = require("../../common/statusCode");
 
 const Role = require("../../models/Role");
 
-const createRole = async (req: Request, res: Response) => {
+const createRole = async (req, res) => {
     const { roleName, roleType } = req.body;
 
     // Get from DB
@@ -19,14 +18,14 @@ const createRole = async (req: Request, res: Response) => {
             roleType: roleType,
         });
         res.send({
-            statusCode: STATUS.SUCCESS,
+            statusCode: RESPONSE.STATUS.SUCCESS,
             data: {
                 message: "Role exist!",
             },
         });
     } else {
         res.send({
-            statusCode: STATUS.ERROR,
+            statusCode: RESPONSE.STATUS.ERROR,
             data: {
                 message: "Role exist!",
             },

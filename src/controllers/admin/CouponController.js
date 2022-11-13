@@ -1,9 +1,8 @@
-import { Request, Response } from "express";
-import { STATUS } from "../../common/statusCode";
+const { STATUS } = require("../../common/statusCode");
 
 const Coupon = require("../../models/Coupon");
 
-const createCoupon = async (req: Request, res: Response) => {
+const createCoupon = async (req, res) => {
     const { couponName, couponValue, couponType } = req.body;
 
     const [coupon, created] = await Coupon.findOrCreate({
@@ -33,7 +32,7 @@ const createCoupon = async (req: Request, res: Response) => {
     }
 };
 
-const updateCoupon = async (req: Request, res: Response) => {
+const updateCoupon = async (req, res) => {
     const { couponId, couponName, couponValue } = req.body;
 
     const updated = await Coupon.update(
@@ -65,7 +64,7 @@ const updateCoupon = async (req: Request, res: Response) => {
     }
 };
 
-const removeCoupon = async (req: Request, res: Response) => {
+const removeCoupon = async (req, res) => {
     const couponId = req.params.id;
 
     const remove = await Coupon.destroy({

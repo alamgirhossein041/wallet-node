@@ -1,4 +1,4 @@
-const settings: IDatabase = {
+const settings = {
     database: process.env.DATABASE,
     username: process.env.USERNAME,
     password: process.env.PASSWORD,
@@ -8,12 +8,3 @@ const settings: IDatabase = {
 };
 
 module.exports = settings;
-
-interface IDatabase {
-    database: string;
-    username: string;
-    password: string;
-    host: string;
-    dialect: string;
-    logging: boolean;
-}

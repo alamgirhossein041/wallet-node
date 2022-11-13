@@ -1,13 +1,11 @@
-import { Request, Response, NextFunction } from "express";
-import jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 
-import { IUser } from "./../interfaces/auth";
-import { STATUS } from "../common/statusCode";
-import { getUser } from "../common/functions";
+const { STATUS } = require("../common/statusCode");
+const FUNCTION = require("../common/functions");
 
-const User = require("../models/User.ts");
+const User = require("../models/User.js");
 
-const login = async (req: Request, res: Response) => {
+const login = async (req, res) => {
     const { username, password } = req.body;
 
     if (!username || !password) {
@@ -47,7 +45,7 @@ const login = async (req: Request, res: Response) => {
     }
 };
 
-const register = async (req: Request, res: Response) => {
+const register = async (req, res) => {
     const { username, password } = req.body;
 
     if (!username || !password) {
@@ -87,8 +85,8 @@ const register = async (req: Request, res: Response) => {
     }
 };
 
-const detail = async (req: Request, res: Response) => {
-    getUser(req, res);
+const detail = async (req, res) => {
+    FUNCTION.getUser(req, res);
 };
 
 module.exports = { login, register, detail };

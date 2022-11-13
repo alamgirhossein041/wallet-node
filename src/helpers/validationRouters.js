@@ -1,16 +1,14 @@
-import { STATUS } from "./../common/statusCode";
-import { Request, Response, NextFunction } from "express";
-const requestType = require("../common/requestType");
+const RESPONSE = require("../common/statusCode");
 
-const validateRequest = (schema: any, type: string) => {
-    return (req: Request, res: Response, next: NextFunction) => {
+const validateRequest = (schema, type) => {
+    return (req, res, next) => {
         const { error } = schema.validate({
             [type]: req[type],
         });
 
         if (error) {
             return res.send({
-                statusCode: STATUS.ERROR,
+                statusCode: RESPONSE.STATUS.ERROR,
                 data: {
                     message: error.details[0].message,
                 },

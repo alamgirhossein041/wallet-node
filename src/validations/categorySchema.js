@@ -1,4 +1,4 @@
-import joi = require("joi");
+const joi = require("joi");
 const requestType = require("../common/requestType");
 const { onlyNumber } = require("../common/regex");
 

@@ -1,4 +1,4 @@
-import { DataTypes } from "@sequelize/core";
+const { DataTypes } = require("@sequelize/core");
 const database = require("../database/database");
 
 const Role = database.define(
