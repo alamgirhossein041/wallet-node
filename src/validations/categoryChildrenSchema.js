@@ -9,6 +9,13 @@ const createCategoryChildrenSchema = joi.object().keys({
     },
 });
 
+const deleteCategoryChildrenSchema = joi.object().keys({
+    [requestType.params]: {
+        id: joi.string().max(2).required(),
+    },
+});
+
 module.exports = {
     createCategoryChildrenSchema,
+    deleteCategoryChildrenSchema,
 };

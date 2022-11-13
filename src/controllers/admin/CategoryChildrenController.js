@@ -109,7 +109,7 @@ const detailCategory = async (req, res) => {
 const removeCategory = async (req, res) => {
     const categoryId = req.params.id;
 
-    const remove = await Category.destroy({
+    const remove = await CategoryChildren.destroy({
         where: {
             id: categoryId,
         },
