@@ -2,13 +2,6 @@ const joi = require("joi");
 const requestType = require("../common/requestType");
 const { onlyNumber } = require("../common/regex");
 
-const getListCategorySchema = joi.object().keys({
-    [requestType.query]: {
-        page: joi.string().required(),
-        limit: joi.string().required(),
-    },
-});
-
 const createCategorySchema = joi.object().keys({
     [requestType.body]: {
         categoryName: joi.string().max(20).required(),
@@ -40,7 +33,6 @@ const deleteCategorySchema = joi.object().keys({
 });
 
 module.exports = {
-    getListCategorySchema,
     createCategorySchema,
     updateCategorySchema,
     getDetailCategorySchema,

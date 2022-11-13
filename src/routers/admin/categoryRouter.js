@@ -14,19 +14,13 @@ const {
 } = require("../../controllers/admin/CategoryController");
 
 const {
-    getListCategorySchema,
     createCategorySchema,
     updateCategorySchema,
     getDetailCategorySchema,
     deleteCategorySchema,
 } = require("../../validations/categorySchema");
 
-router.get(
-    "/category/list",
-    [validateRequest(getListCategorySchema, requestType.query)],
-    checkAccessToken,
-    listCategory
-);
+router.get("/category/list", checkAccessToken, listCategory);
 router.post(
     "/category/create",
     [validateRequest(createCategorySchema, requestType.body), checkAccessToken],

@@ -1,6 +1,7 @@
 const { STATUS } = require("../../common/statusCode");
 
 const Category = require("../../models/Category");
+const CategoryChildren = require("../../models/CategoryChildren");
 
 const createCategory = async (req, res) => {
     const { categoryName, categorySlug, categoryDesc, categoryType } = req.body;
@@ -123,22 +124,18 @@ const removeCategory = async (req, res) => {
 };
 
 const listCategory = async (req, res) => {
-    const { page, limit } = req.query;
-
-    const offset = Number(page) * Number(limit) - Number(limit);
-
     const categories = await Category.findAll({
-        offset: offset,
-        limit: Number(limit),
+        include: [
+            {
+                model: CategoryChildren,
+            },
+        ],
     });
-
-    const totalCategory = await Category.findAll();
 
     return res.send({
         statusCode: STATUS.SUCCESS,
         data: {
             categories: categories,
-            total: totalCategory.length,
         },
     });
 };

@@ -1,8 +1,9 @@
 const { DataTypes } = require("@sequelize/core");
 const database = require("../database/database");
+const Category = require("./Category");
 
 const CategoryChildren = database.define(
-    "category",
+    "categoryChildren",
     {
         id: {
             type: DataTypes.INTEGER,

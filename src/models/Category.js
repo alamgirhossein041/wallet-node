@@ -1,8 +1,9 @@
 const { DataTypes } = require("@sequelize/core");
 const database = require("../database/database");
+const CategoryChildren = require("./CategoryChildren");
 
 const Category = database.define(
-    "category",
+    "Category",
     {
         id: {
             type: DataTypes.INTEGER,
@@ -18,6 +19,15 @@ const Category = database.define(
         tableName: "categories",
     }
 );
+Category.hasMany(CategoryChildren, {
+    include: [
+        {
+            model: CategoryChildren,
+            as: "categoryChildren",
+            foreignKey: "categoryId",
+        },
+    ],
+});
 database.sync();
 
 module.exports = Category;
