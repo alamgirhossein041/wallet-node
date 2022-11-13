@@ -93,6 +93,7 @@ const detailCategory = async (req, res) => {
             data: {
                 message: "",
                 data: category,
+                isParentCategory: false,
             },
         });
     } else {

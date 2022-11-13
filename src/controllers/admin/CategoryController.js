@@ -82,6 +82,7 @@ const detailCategory = async (req, res) => {
             data: {
                 message: "",
                 data: category,
+                isParentCategory: true,
             },
         });
     } else {
@@ -89,34 +90,6 @@ const detailCategory = async (req, res) => {
             statusCode: STATUS.ERROR,
             data: {
                 message: "Get detail category failed!",
-                data: "",
-            },
-        });
-    }
-};
-
-const removeCategory = async (req, res) => {
-    const categoryId = req.params.id;
-
-    const remove = await Category.destroy({
-        where: {
-            id: categoryId,
-        },
-    });
-
-    if (remove) {
-        return res.send({
-            statusCode: STATUS.SUCCESS,
-            data: {
-                message: "Delete category successfully!",
-                data: "",
-            },
-        });
-    } else {
-        return res.send({
-            statusCode: STATUS.ERROR,
-            data: {
-                message: "Delete category failed!",
                 data: "",
             },
         });
@@ -140,4 +113,4 @@ const listCategory = async (req, res) => {
     });
 };
 
-module.exports = { createCategory, updateCategory, detailCategory, removeCategory, listCategory };
+module.exports = { createCategory, updateCategory, detailCategory, listCategory };

@@ -26,15 +26,8 @@ const getDetailCategorySchema = joi.object().keys({
     },
 });
 
-const deleteCategorySchema = joi.object().keys({
-    [requestType.params]: {
-        id: joi.string().pattern(onlyNumber).required(),
-    },
-});
-
 module.exports = {
     createCategorySchema,
     updateCategorySchema,
     getDetailCategorySchema,
-    deleteCategorySchema,
 };

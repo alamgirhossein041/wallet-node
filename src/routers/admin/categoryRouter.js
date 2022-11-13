@@ -9,7 +9,6 @@ const {
     createCategory,
     updateCategory,
     detailCategory,
-    removeCategory,
     listCategory,
 } = require("../../controllers/admin/CategoryController");
 
@@ -17,7 +16,6 @@ const {
     createCategorySchema,
     updateCategorySchema,
     getDetailCategorySchema,
-    deleteCategorySchema,
 } = require("../../validations/categorySchema");
 
 router.get("/category/list", checkAccessToken, listCategory);
@@ -35,11 +33,6 @@ router.get(
     "/category/:id",
     [validateRequest(getDetailCategorySchema, requestType.params), checkAccessToken],
     detailCategory
-);
-router.get(
-    "/category/delete/:id",
-    [validateRequest(deleteCategorySchema, requestType.params), checkAccessToken],
-    removeCategory
 );
 
 module.exports = router;
