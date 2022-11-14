@@ -1,5 +1,6 @@
 const { STATUS } = require("./statusCode");
 const jwt = require("jsonwebtoken");
+const formidable = require("formidable");
 
 const User = require("../models/User.js");
 
@@ -52,4 +53,12 @@ const getUser = async (req, res) => {
     }
 };
 
-module.exports = { getUser };
+const handleRequestFormData = (req) => {
+    const form = formidable({ multiples: true });
+
+    form.parse(req, (err, fields, files) => {
+        return { err, fields, files };
+    });
+};
+
+module.exports = { getUser, handleRequestFormData };

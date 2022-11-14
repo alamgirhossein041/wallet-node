@@ -1,20 +1,47 @@
 const RESPONSE = require("../common/statusCode");
 
-const validateRequest = (schema, type) => {
-    return (req, res, next) => {
-        const { error } = schema.validate({
-            [type]: req[type],
-        });
+const formidable = require("formidable");
+const requestType = require("../common/requestType");
 
-        if (error) {
-            return res.send({
-                statusCode: RESPONSE.STATUS.ERROR,
-                data: {
-                    message: error.details[0].message,
-                },
-            });
+const { handleRequestFormData } = require("../common/functions");
+
+const validateRequest = (schema, type) => {
+    return async (req, res, next) => {
+        // Request form-data
+        if (type === requestType.formData) {
+            const { err, fields, files } = handleRequestFormData(req);
+
+            console.log("fields: ", fields);
+
+            try {
+                const result = await schema.validateAsync(fields);
+                console.log("result: ", result);
+                next();
+            } catch (error) {
+                return res.send({
+                    statusCode: RESPONSE.STATUS.ERROR,
+                    data: {
+                        message: error.details[0].message,
+                    },
+                });
+            }
+            return;
         } else {
-            next();
+            // Request body, params, query
+            const { error } = schema.validate({
+                [type]: req[type],
+            });
+
+            if (error) {
+                return res.send({
+                    statusCode: RESPONSE.STATUS.ERROR,
+                    data: {
+                        message: error.details[0].message,
+                    },
+                });
+            } else {
+                next();
+            }
         }
     };
 };
