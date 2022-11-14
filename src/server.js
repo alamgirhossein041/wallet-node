@@ -23,13 +23,15 @@ const {
     promotionRouter,
     roleRouter,
     couponRouter,
-} = require("./routers/admin/admin-router");
+    productRouter,
+} = require("./routers/admin");
 app.use("/admin", authRouter);
 app.use("/admin", categoryRouter);
 app.use("/admin", categoryChildrenRouter);
 app.use("/admin", promotionRouter);
 app.use("/admin", roleRouter);
 app.use("/admin", couponRouter);
+app.use("/admin", productRouter);
 
 app.listen(port, () => {
     console.log(`[server]: Server is running at http://localhost:${port}`);
