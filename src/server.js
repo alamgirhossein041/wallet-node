@@ -15,6 +15,10 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Handle form data
+const multer = require("multer");
+const upload = multer();
+
 // Admin router
 const {
     authRouter,
@@ -31,7 +35,7 @@ app.use("/admin", categoryChildrenRouter);
 app.use("/admin", promotionRouter);
 app.use("/admin", roleRouter);
 app.use("/admin", couponRouter);
-app.use("/admin", productRouter);
+app.use("/admin", upload.single("productImages"), productRouter);
 
 app.listen(port, () => {
     console.log(`[server]: Server is running at http://localhost:${port}`);

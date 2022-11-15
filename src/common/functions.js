@@ -53,12 +53,4 @@ const getUser = async (req, res) => {
     }
 };
 
-const handleRequestFormData = (req) => {
-    const form = formidable({ multiples: true });
-
-    form.parse(req, (err, fields, files) => {
-        return { err, fields, files };
-    });
-};
-
-module.exports = { getUser, handleRequestFormData };
+module.exports = { getUser };

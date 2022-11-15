@@ -10,7 +10,7 @@ const { createProduct } = require("../../controllers/admin/ProductController");
 
 router.post(
     "/product/create",
-    [validateRequest(createProductSchema, requestType.formData), checkAccessToken],
+    [validateRequest(createProductSchema, requestType.body), checkAccessToken],
     createProduct
 );
 
