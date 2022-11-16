@@ -3,7 +3,8 @@ const { STATUS } = require("../../common/statusCode");
 const Product = require("../../models/Product");
 
 const createProduct = (req, res) => {
-    console.log("controller");
+    const file = req.file;
+    console.log("controller: ", file);
 };
 
 module.exports = { createProduct };
