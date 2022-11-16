@@ -1,6 +1,5 @@
 const { STATUS } = require("./statusCode");
 const jwt = require("jsonwebtoken");
-const formidable = require("formidable");
 
 const User = require("../models/User.js");
 
